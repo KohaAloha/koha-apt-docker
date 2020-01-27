@@ -19,13 +19,20 @@ ENV REFRESHED_AT 2019-05-24-1
 RUN     rm -rf /var/cache/apt/archives/* \
    && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get -y update  && apt-get install -y wget gnupg locales
+
+
+# Set locales
+RUN    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
+    && echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen \
+    && locale-gen \
+    && dpkg-reconfigure locales \
+    && /usr/sbin/update-locale LANG=en_US.UTF-8
 
 ENV LANGUAGE en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 ENV LC_CTYPE en_US.UTF-8
-
-RUN apt-get -y update  && apt-get install -y wget gnupg
 
 
 # Add Koha development repositories
