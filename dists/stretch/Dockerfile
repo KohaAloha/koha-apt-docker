@@ -11,6 +11,15 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN echo "deb http://httpredir.debian.org/debian stretch main" > /etc/apt/sources.list
 RUN echo "deb http://security.debian.org/ stretch/updates main" >> /etc/apt/sources.list
 
+
+
+RUN echo '11111111111111111111111111111111111111111111111111111111'
+RUN echo '-------------------------------------------------------'
+RUN echo '-------------------------------------------------------'
+RUN echo '-------------------------------------------------------'
+RUN echo '-------------------------------------------------------'
+
+
 ENV REFRESHED_AT 2019-05-24-1
 
 # Install apache2 and testting deps
@@ -57,10 +66,26 @@ WORKDIR /kohadevbox
 
 VOLUME /kohadevbox/koha
 
+RUN echo '2222222222222222222222222222222222222222222222222222222'
+RUN echo '-------------------------------------------------------'
+RUN echo '-------------------------------------------------------'
+RUN echo '-------------------------------------------------------'
+RUN echo '-------------------------------------------------------'
+RUN echo '-------------------------------------------------------'
+
 COPY files/run.sh /kohadevbox
 COPY files/templates /kohadevbox/templates
 COPY env/defaults.env /kohadevbox/templates/defaults.env
 
 CMD ["/bin/bash", "/kohadevbox/run.sh"]
+
+
+RUN echo '3333333333333333333333333333333333333333333333333333333'
+RUN echo '-------------------------------------------------------'
+RUN echo '-------------------------------------------------------'
+RUN echo '-------------------------------------------------------'
+RUN echo '-------------------------------------------------------'
+RUN echo '-------------------------------------------------------'
+
 
 EXPOSE 8080 8081
