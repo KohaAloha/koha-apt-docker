@@ -13,6 +13,7 @@ dpkg -l | grep mojo
 dpkg -l | grep openapi
 dpkg -l | grep validator
 
+echo '7777777777777777777777777777777777777777777777'
 if [ "$RUN_TESTS_AND_EXIT" = "yes" ]; then
 
     cd ${BUILD_DIR}/koha
@@ -32,4 +33,4 @@ else
 fi
 
 
-echo '7777777777777777777777777777777777777777777777'
+echo '8888888888888888888888888888888888888888';
