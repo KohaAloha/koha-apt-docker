@@ -12,7 +12,7 @@ export TEMP=/tmp
 # dpkg -l | grep openapi
 # dpkg -l | grep validator
 
-    if apt install -y koha-common1; then
+    if apt install -y koha-common; then
         continue;
     else
         echo "TESTS FAILED"
