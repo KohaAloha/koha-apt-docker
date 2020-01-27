@@ -17,7 +17,7 @@ export TEMP=/tmp
 echo '7777777777777777777777777777777777777777777777'
 if [ "$RUN_TESTS_AND_EXIT" = "yes" ]; then
 
-    if apt install -s koha-common; then
+    if apt install -y -s koha-common; then
        touch testing.success
     fi
 
