@@ -62,6 +62,8 @@ RUN apt-cache policy libjson-validator-perl
 RUN apt-get -y update  && apt-get -s install koha-common 
 
 RUN mkdir /kohadevbox
+RUN mkdir /kohadevbox/templates
+
 WORKDIR /kohadevbox
 
 VOLUME /kohadevbox/koha
@@ -74,7 +76,6 @@ RUN echo '-------------------------------------------------------'
 RUN echo '-------------------------------------------------------'
 
 COPY files/run.sh /kohadevbox
-COPY files/templates /kohadevbox/templates
 COPY env/defaults.env /kohadevbox/templates/defaults.env
 
 CMD ["/bin/bash", "-x", "/kohadevbox/run.sh"]
