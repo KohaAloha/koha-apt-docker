@@ -75,16 +75,6 @@ echo "127.0.0.1    ${KOHA_OPAC_FQDN} ${KOHA_INTRANET_FQDN}" >> /etc/hosts
 
 envsubst "$VARS_TO_SUB" < ${BUILD_DIR}/templates/instance_bashrc > /var/lib/koha/${KOHA_INSTANCE}/.bashrc
 
-perl ${BUILD_DIR}/misc4dev/do_all_you_can_do.pl \
-            --instance          ${KOHA_INSTANCE} \
-            --userid            ${KOHA_USER} \
-            --password          ${KOHA_PASS} \
-            --marcflavour       ${KOHA_MARC_FLAVOUR} \
-            --koha_dir          ${BUILD_DIR}/koha \
-            --opac-base-url     ${KOHA_OPAC_URL} \
-            --intranet-base-url ${KOHA_INTRANET_URL} \
-            --gitify_dir        ${BUILD_DIR}/gitify
-
 # Configure git-bz
 cd /kohadevbox/koha
 git config --global user.name "${GIT_USER_NAME}"
@@ -98,14 +88,6 @@ git config --global apply.whitespace fix
 git config --global bz-tracker.bugs.koha-community.org.bz-user ${GIT_BZ_USER}
 git config --global bz-tracker.bugs.koha-community.org.bz-password ${GIT_BZ_PASSWORD}
 
-# Stop apache2
-service apache2 stop
-# Configure and start koha-plack
-koha-plack --enable ${KOHA_INSTANCE} 
-koha-plack --start ${KOHA_INSTANCE} 
-# Start Zebra and the Indexer
-koha-zebra --start ${KOHA_INSTANCE} 
-koha-indexer --start ${KOHA_INSTANCE}
 
 # Start apache
 service apache2 start
@@ -117,51 +99,24 @@ fi
 
 echo ${KOHA_PROVE_CPUS}
 
-
 #dpkg -l
 dpkg -l | grep mojo
 dpkg -l | grep openapi
 dpkg -l | grep validator
 
 if [ "$RUN_TESTS_AND_EXIT" = "yes" ]; then
+
     cd ${BUILD_DIR}/koha
     rm -rf /cover_db/*
 
-    if [ ${COVERAGE} ]; then
-        koha-shell ${KOHA_INSTANCE} -p -c "rm -rf cover_db;
-                                  JUNIT_OUTPUT_FILE=junit_main.xml \
-                                  PERL5OPT=-MDevel::Cover=-db,/cover_db \
-                                  KOHA_NO_TABLE_LOCKS=1 \
-                                  KOHA_INTRANET_URL=http://koha:8081 \
-                                  KOHA_OPAC_URL=http://koha:8080 \
-                                  KOHA_USER=${KOHA_USER} \
-                                  KOHA_PASS=${KOHA_PASS} \
-                                  SELENIUM_ADDR=selenium \
-                                  SELENIUM_PORT=4444 \
-                                  TEST_QA=1 \
-                                  prove -j ${KOHA_PROVE_CPUS} \
-                                  --rules='par=t/db_dependent/00-strict.t' \
-                                  --rules='seq=t/db_dependent/**.t' --rules='par=**' \
-                                  --timer --harness=TAP::Harness::JUnit -s -r t/  \
-                                  && touch testing.success; \
-                                  mkdir cover_db; cp -r /cover_db/* cover_db;
-                                  cover -report clover"
+    if  apt install -s koha-common ; then
+        touch testing.success;
+        echo command returned true;
     else
-        koha-shell ${KOHA_INSTANCE} -p -c "JUNIT_OUTPUT_FILE=junit_main.xml \
-                                  KOHA_NO_TABLE_LOCKS=1 \
-                                  KOHA_INTRANET_URL=http://koha:8081 \
-                                  KOHA_OPAC_URL=http://koha:8080 \
-                                  KOHA_USER=${KOHA_USER} \
-                                  KOHA_PASS=${KOHA_PASS} \
-                                  SELENIUM_ADDR=selenium \
-                                  SELENIUM_PORT=4444 \
-                                  TEST_QA=1 \
-                                  prove -j ${KOHA_PROVE_CPUS} \
-                                  --rules='par=t/db_dependent/00-strict.t' \
-                                  --rules='seq=t/db_dependent/**.t' --rules='par=**' \
-                                  --timer --harness=TAP::Harness::JUnit -s -r t/  \
-                                  && touch testing.success"
+        echo command returned some error
     fi
+
+
 else
     # TODO: We could use supervise as the main loop
     /bin/bash -c "trap : TERM INT; sleep infinity & wait"
