@@ -10,20 +10,21 @@ export TEMP=/tmp
 
 # dpkg -l
 
-dpkg -l | grep mojo
-dpkg -l | grep openapi
-dpkg -l | grep validator
+# dpkg -l | grep mojo
+# dpkg -l | grep openapi
+# dpkg -l | grep validator
 
 echo '7777777777777777777777777777777777777777777777'
 if [ "$RUN_TESTS_AND_EXIT" = "yes" ]; then
 
-    if  apt install -s koha-common ; then
-        touch testing.success;
-    else
+    if apt install -s koha-common; then
+       touch testing.success
+    fi
 
 else
     # TODO: We could use supervise as the main loop
     /bin/bash -c "trap : TERM INT; sleep infinity & wait"
+
 fi
 
 
