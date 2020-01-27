@@ -6,9 +6,9 @@ set -e
 export BUILD_DIR=/kohadevbox
 export TEMP=/tmp
 
-#while ! nc -z db 3306; do sleep 1; done
+# while ! nc -z db 3306; do sleep 1; done
 
-#dpkg -l
+# dpkg -l
 dpkg -l | grep mojo
 dpkg -l | grep openapi
 dpkg -l | grep validator
@@ -33,4 +33,5 @@ else
 fi
 
 
-echo '8888888888888888888888888888888888888888';
+echo '8888888888888888888888888888888888888888'
+
