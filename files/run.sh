@@ -18,13 +18,17 @@ echo '7777777777777777777777777777777777777777777777'
 if [ "$RUN_TESTS_AND_EXIT" = "yes" ]; then
 
     if apt install -y koha-common1; then
-        touch testing.success
-        exit 0;
+#        touch testing.success
+echo '888888888888888888888888888888888888888888888'
+        continue;
     else
         exit 2;
     fi
 
 else
+
+echo '9999999999999999999999999999999999999999999'
+
     exit 2;
 
     # TODO: We could use supervise as the main loop
