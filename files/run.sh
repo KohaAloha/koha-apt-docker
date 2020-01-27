@@ -18,10 +18,11 @@ echo '7777777777777777777777777777777777777777777777'
 if [ "$RUN_TESTS_AND_EXIT" = "yes" ]; then
 
     if apt install -y -s koha-common1; then
-       touch testing.success
+        touch testing.success
+        exit 0;
+    else
+        exit 2;
     fi
-
-    exit 0;
 
 else
     exit 2;
