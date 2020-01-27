@@ -19,7 +19,7 @@ ENV REFRESHED_AT 2019-05-24-1
 RUN     rm -rf /var/cache/apt/archives/* \
    && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get -y update  && apt-get install -y wget gnupg locales nc
+RUN apt-get -y update  && apt-get install -y wget gnupg locales netcat
 
 
 # Set locales
