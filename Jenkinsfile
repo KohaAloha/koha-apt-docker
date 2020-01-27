@@ -6,7 +6,7 @@ node {
         checkout scm
     }
 
-    ['stretch','jessie',buster'].each {
+    ['stretch','jessie','buster'].each {
 
 //    ['stretch','buster','buster-mojo8'].each {
 //    ['buster-mojo8'].each {
