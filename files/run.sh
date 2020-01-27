@@ -21,9 +21,13 @@ if [ "$RUN_TESTS_AND_EXIT" = "yes" ]; then
        touch testing.success
     fi
 
+    exit 0;
+
 else
+    exit 2;
+
     # TODO: We could use supervise as the main loop
-    /bin/bash -c "trap : TERM INT; sleep infinity & wait"
+#    /bin/bash -c "trap : TERM INT; sleep infinity & wait"
 
 fi
 
