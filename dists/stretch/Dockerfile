@@ -19,12 +19,6 @@ ENV REFRESHED_AT 2019-05-24-1
 RUN     rm -rf /var/cache/apt/archives/* \
    && rm -rf /var/lib/apt/lists/*
 
-# Set locales
-RUN    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
-    && echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen \
-    && locale-gen \
-    && dpkg-reconfigure locales \
-    && /usr/sbin/update-locale LANG=en_US.UTF-8
 
 ENV LANGUAGE en_US.UTF-8
 ENV LANG en_US.UTF-8
@@ -35,6 +29,7 @@ ENV LC_CTYPE en_US.UTF-8
 RUN echo "deb http://debian.kohaaloha.com/koha 19.11 main" > /etc/apt/sources.list.d/koha.list
 #RUN echo "deb [trusted=yes] http://apt.abunchofthings.net/koha-nightly unstable main" >> /etc/apt/sources.list.d/koha.list
 
+RUN apt-get -y update  && apt-get -s install wget gnupg
 
 # Add repository key
 RUN wget -O- http://debian.kohaaloha.com/koha/gpg.asc | apt-key add -
