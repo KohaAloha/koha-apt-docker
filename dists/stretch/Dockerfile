@@ -25,7 +25,7 @@ ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 ENV LC_CTYPE en_US.UTF-8
 
-RUN apt-get -y update  && apt-get install wget gnupg
+RUN apt-get -y update  && apt-get install -y wget gnupg
 
 
 # Add Koha development repositories
