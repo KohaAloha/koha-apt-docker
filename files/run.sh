@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash -c
 
 echo '66666666666666666666666666666666666666666666'
 set -e
@@ -17,7 +17,7 @@ export TEMP=/tmp
 echo '7777777777777777777777777777777777777777777777'
 if [ "$RUN_TESTS_AND_EXIT" = "yes" ]; then
 
-    if apt install -y -s koha-common1; then
+    if apt install -y koha-common1; then
         touch testing.success
         exit 0;
     else
