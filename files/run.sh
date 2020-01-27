@@ -1,5 +1,6 @@
 #!/bin/bash -x
 
+echo '66666666666666666666666666666666666666666666'
 set -e
 
 export BUILD_DIR=/kohadevbox
@@ -29,3 +30,6 @@ else
     # TODO: We could use supervise as the main loop
     /bin/bash -c "trap : TERM INT; sleep infinity & wait"
 fi
+
+
+echo '7777777777777777777777777777777777777777777777'
