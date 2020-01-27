@@ -12,7 +12,7 @@ export KOHA_OPAC_FQDN=${KOHA_OPAC_PREFIX}${KOHA_INSTANCE}${KOHA_OPAC_SUFFIX}${KO
 export KOHA_OPAC_URL=http://${KOHA_OPAC_FQDN}:${KOHA_OPAC_PORT}
 
 # Wait for the DB server startup
-while ! nc -z db 3306; do sleep 1; done
+#while ! nc -z db 3306; do sleep 1; done
 
 # TODO: Have bugs pushed so all this is a koha-create parameter
 echo "${KOHA_INSTANCE}:koha_${KOHA_INSTANCE}:${KOHA_DB_PASSWORD}:koha_${KOHA_INSTANCE}" > /etc/koha/passwd
