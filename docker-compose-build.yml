@@ -17,15 +17,3 @@ services:
             COVERAGE: ${COVERAGE}
             RUN_TESTS_AND_EXIT: ${RUN_TESTS_AND_EXIT}
             LOCAL_USER_ID: ${LOCAL_USER_ID}
-        networks:
-            kohanet:
-                aliases:
-                    - "${KOHA_INTRANET_PREFIX}${KOHA_INSTANCE}${KOHA_INTRANET_SUFFIX}${KOHA_DOMAIN}"
-                    - "${KOHA_OPAC_PREFIX}${KOHA_INSTANCE}${KOHA_OPAC_SUFFIX}${KOHA_DOMAIN}"
-        ports:
-            - "8080:8080"
-            - "8081:8081"
-
-networks:
-    kohanet:
-
