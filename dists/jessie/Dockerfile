@@ -12,14 +12,6 @@ RUN echo "deb http://httpredir.debian.org/debian jessie main" > /etc/apt/sources
 RUN echo "deb http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list
 
 
-
-RUN echo '11111111111111111111111111111111111111111111111111111111'
-RUN echo '-------------------------------------------------------'
-RUN echo '-------------------------------------------------------'
-RUN echo '-------------------------------------------------------'
-RUN echo '-------------------------------------------------------'
-
-
 ENV REFRESHED_AT 2019-05-24-1
 
 # Install apache2 and testting deps
@@ -54,7 +46,9 @@ RUN echo "deb http://debian.koha-community.org/koha 19.11 main" > /etc/apt/sourc
 RUN wget -O- http://debian.koha-community.org/koha/gpg.asc | apt-key add -
 
 # Install koha-common
-RUN apt-get -y update
+RUN apt-get -y update \
+    && apt-get -y upgrade \
+    && apt-get -y dist-upgrade
 
 RUN mkdir /kohadevbox
 RUN mkdir /kohadevbox/templates
@@ -63,25 +57,9 @@ WORKDIR /kohadevbox
 
 VOLUME /kohadevbox/koha
 
-RUN echo '2222222222222222222222222222222222222222222222222222222'
-RUN echo '-------------------------------------------------------'
-RUN echo '-------------------------------------------------------'
-RUN echo '-------------------------------------------------------'
-RUN echo '-------------------------------------------------------'
-RUN echo '-------------------------------------------------------'
-
 COPY files/run.sh /kohadevbox
 COPY env/defaults.env /kohadevbox/templates/defaults.env
 
 CMD ["/bin/bash", "-x", "/kohadevbox/run.sh"]
-
-
-RUN echo '3333333333333333333333333333333333333333333333333333333'
-RUN echo '-------------------------------------------------------'
-RUN echo '-------------------------------------------------------'
-RUN echo '-------------------------------------------------------'
-RUN echo '-------------------------------------------------------'
-RUN echo '-------------------------------------------------------'
-
 
 EXPOSE 8080 8081
