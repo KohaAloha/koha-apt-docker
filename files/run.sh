@@ -11,10 +11,10 @@ export TEMP=/tmp
 # dpkg -l | grep mojo
 # dpkg -l | grep openapi
 # dpkg -l | grep validator
-if ! apt install -y -s koha-common; then
-    echo "TESTS FAILED"
+if apt install -y -s koha-common; then
+    echo "TESTS OK!"
 fi
 
-if ! apt install -y koha-common; then
-    echo "TESTS FAILED"
+if apt install -y koha-common; then
+    echo "TESTS OK!"
 fi
