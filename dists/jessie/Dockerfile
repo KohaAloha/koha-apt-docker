@@ -57,9 +57,9 @@ WORKDIR /kohadevbox
 
 VOLUME /kohadevbox/koha
 
-COPY files/run.sh /kohadevbox
+COPY files/run3.sh /kohadevbox
 COPY env/defaults.env /kohadevbox/templates/defaults.env
 
-CMD ["/bin/bash", "-x", "/kohadevbox/run.sh"]
+CMD ["/bin/bash", "-x", "/kohadevbox/run3.sh"]
 
 EXPOSE 8080 8081
