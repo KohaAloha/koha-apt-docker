@@ -1,0 +1,40 @@
+def distros =  [ 'jessie','jessie32','stretch','bullseye','buster']
+
+def stepsForParallel = distros.collectEntries {
+    ["echoing ${it}" : transformIntoStep(it)]
+}
+
+parallel stepsForParallel
+
+def transformIntoStep(it) {
+ return {
+  node {
+        def app
+            stage('Clone repository') {
+            checkout scm
+        }
+
+        stage( "${it} | Build image" ) {
+            app = docker.build("kohaaloha/koha-apt", "--no-cache --rm -f dists/${it}/Dockerfile .")
+        }
+
+        if ( it == 'stretch' ) {
+            stage( "${it} | Push image" ) {
+                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                    app.push( "master" );
+                }
+            }
+        } else {
+            stage( "${it} | Push image" ) {
+                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                    app.push( "master-${it}" );
+                }
+            }
+        }
+
+  }
+ }
+}
+
+
+
