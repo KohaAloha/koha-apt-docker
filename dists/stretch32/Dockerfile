@@ -60,6 +60,9 @@ RUN mkdir /kohadevbox/templates
 RUN echo `apt-cache show koha-common`
 RUN echo `apt-cache policy koha-common`
 
+RUN echo `apt-cache show libnet-oauth2-authorizationserver-perl`
+RUN echo `apt-cache policy libnet-oauth2-authorizationserver-perl`
+
 WORKDIR /kohadevbox
 
 VOLUME /kohadevbox/koha
