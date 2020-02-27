@@ -1,6 +1,7 @@
 # Base it on Debian 10
 #FROM debian:jessie
-FROM 32bit:debian
+#FROM 32bit:debian
+FROM i386:debian
 
 # File Author / Maintainer
 LABEL maintainer="jenkins@kohaaloha.com"
