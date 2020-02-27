@@ -8,7 +8,7 @@ if ( d  ) {
 
 } else  {
     echo 'default'
-    distros =  [ 'jessie','jessie32','stretch','bullseye','buster']
+    distros =  [ 'jessie','jessie32','stretch','stretch32','bullseye','buster']
 }
 
 println "${distros}"
