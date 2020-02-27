@@ -42,7 +42,7 @@ ENV LC_CTYPE en_US.UTF-8
 
 # Add Koha development repositories
 #RUN echo "deb http://debian.kohaaloha.com/koha 19.11 main" > /etc/apt/sources.list.d/koha.list
-RUN echo "deb http://debian.koha-community.org/koha 19.11 main" > /etc/apt/sources.list.d/koha.list
+RUN echo "deb [arch=i386] http://debian.koha-community.org/koha 19.11 main" > /etc/apt/sources.list.d/koha.list
 #RUN echo "deb [trusted=yes] http://apt.abunchofthings.net/koha-nightly unstable main" >> /etc/apt/sources.list.d/koha.list
 
 # Add repository key
