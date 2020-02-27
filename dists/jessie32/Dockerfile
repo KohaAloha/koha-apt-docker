@@ -57,6 +57,9 @@ RUN apt-get -y update \
 RUN mkdir /kohadevbox
 RUN mkdir /kohadevbox/templates
 
+RUN echo `apt-cache show koha-common`
+RUN echo `apt-cache policy koha-common`
+
 WORKDIR /kohadevbox
 
 VOLUME /kohadevbox/koha
