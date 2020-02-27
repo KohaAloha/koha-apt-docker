@@ -1,4 +1,18 @@
-def distros =  [ 'jessie','jessie32','stretch','bullseye','buster']
+def d  = params.DISTROS
+def distros =  [];
+
+if ( d  ) {
+    echo 'input'
+//    distros.add(0,d)
+    distros << d
+
+} else  {
+    echo 'default'
+    distros =  [ 'jessie','jessie32','stretch','bullseye','buster']
+}
+
+println "${distros}"
+
 
 def stepsForParallel = distros.collectEntries {
     ["echoing ${it}" : transformIntoStep(it)]
