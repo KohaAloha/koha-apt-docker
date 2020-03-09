@@ -46,7 +46,9 @@ RUN echo "deb http://debian.koha-community.org/koha 19.11 main" > /etc/apt/sourc
 RUN wget -O- http://debian.koha-community.org/koha/gpg.asc | apt-key add -
 
 # Install koha-common
-RUN apt-get -y update
+RUN apt-get -y update \
+    && apt-get -y upgrade \
+    && apt-get -y dist-upgrade
 
 RUN mkdir /kohadevbox
 RUN mkdir /kohadevbox/templates
@@ -55,17 +57,9 @@ WORKDIR /kohadevbox
 
 VOLUME /kohadevbox/koha
 
-
 COPY files/run.sh /kohadevbox
 COPY env/defaults.env /kohadevbox/templates/defaults.env
 
 CMD ["/bin/bash", "-x", "/kohadevbox/run.sh"]
-
-
-CMD echo '-------------------------------------------------------'
-CMD echo '-------------------------------------------------------'
-CMD echo '-------------------------------------------------------'
-CMD echo '-------------------------------------------------------'
-
 
 EXPOSE 8080 8081
