@@ -6,13 +6,18 @@ export TEMP=/tmp
 
 # while ! nc -z db 3306; do sleep 1; done
 
-# dpkg -l
 
-# dpkg -l | grep mojo
-# dpkg -l | grep openapi
-# dpkg -l | grep validator
 apt update
-apt install -y
+#apt install -y
+
+
+ dpkg -l
+
+ dpkg -l | grep mojo
+ dpkg -l | grep openapi
+ dpkg -l | grep validator
+
+
 
 if apt install -y -s koha-common; then
     echo "TESTS OK!"
