@@ -11,6 +11,9 @@ export TEMP=/tmp
 # dpkg -l | grep mojo
 # dpkg -l | grep openapi
 # dpkg -l | grep validator
+apt update
+apt install -y
+
 if apt install -y -s koha-common; then
     echo "TESTS OK!"
 fi
